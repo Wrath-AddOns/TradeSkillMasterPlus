@@ -145,32 +145,32 @@ function TSM:OnInitialize()
 	
 	-- Prepare the TradeSkillMasterAppDB database
 	-- We're not using AceDB here on purpose due to bugs in AceDB, but are emulating the parts of it that we need.
-	-- local json = TradeSkillMasterAppDB
-	-- TradeSkillMasterAppDB = nil
-	-- if type(json) == "string" then
-		-- json = gsub(json, "%[", "{")
-		-- json = gsub(json, "%]", "}")
-		-- json = gsub(json, "\"([a-zA-Z]+)\":", "%1=")
-		-- json = gsub(json, "\"([^\"]+)\":", "[\"%1\"]=")
-		-- local func, err = loadstring("TSM_APP_DATA_TMP = " .. json .. "")
-		-- if func then
-			-- func()
-			-- TradeSkillMasterAppDB = TSM_APP_DATA_TMP
-			-- TSM_APP_DATA_TMP = nil
-		-- end
-	-- end
-	-- TradeSkillMasterAppDB = TradeSkillMasterAppDB or {factionrealm={}, profiles={}}
-	-- TradeSkillMasterAppDB.version = max(TradeSkillMasterAppDB.version or 0, 7)
-	-- TradeSkillMasterAppDB.region = strsub(GetCVar("realmList"), 1, 2):upper()
-	-- local factionrealmKey = UnitFactionGroup("player").." - "..GetRealmName()
-	-- local profileKey = TSM.db:GetCurrentProfile()
-	-- TradeSkillMasterAppDB.factionrealm[factionrealmKey] = TradeSkillMasterAppDB.factionrealm[factionrealmKey] or {}
-	-- TradeSkillMasterAppDB.profiles[profileKey] = TradeSkillMasterAppDB.profiles[profileKey] or {}
-	-- TSM.appDB = {}
-	-- TSM.appDB.factionrealm = TradeSkillMasterAppDB.factionrealm[factionrealmKey]
-	-- TSM.appDB.profile = TradeSkillMasterAppDB.profiles[profileKey]
-	-- TSM.appDB.profile.groupTest = nil
-	-- TSM.appDB.keys = {profile=profileKey, factionrealm=factionrealmKey}
+	 local json = TradeSkillMasterAppDB
+	 TradeSkillMasterAppDB = nil
+	 if type(json) == "string" then
+		 json = gsub(json, "%[", "{")
+		 json = gsub(json, "%]", "}")
+		 json = gsub(json, "\"([a-zA-Z]+)\":", "%1=")
+		 json = gsub(json, "\"([^\"]+)\":", "[\"%1\"]=")
+		 local func, err = loadstring("TSM_APP_DATA_TMP = " .. json .. "")
+		 if func then
+			 func()
+			 TradeSkillMasterAppDB = TSM_APP_DATA_TMP
+			 TSM_APP_DATA_TMP = nil
+		 end
+	 end
+	 TradeSkillMasterAppDB = TradeSkillMasterAppDB or {factionrealm={}, profiles={}}
+	 TradeSkillMasterAppDB.version = max(TradeSkillMasterAppDB.version or 0, 7)
+	 TradeSkillMasterAppDB.region = strsub(GetCVar("realmList"), 1, 2):upper()
+	 local factionrealmKey = UnitFactionGroup("player").." - "..GetRealmName()
+	 local profileKey = TSM.db:GetCurrentProfile()
+	 TradeSkillMasterAppDB.factionrealm[factionrealmKey] = TradeSkillMasterAppDB.factionrealm[factionrealmKey] or {}
+	 TradeSkillMasterAppDB.profiles[profileKey] = TradeSkillMasterAppDB.profiles[profileKey] or {}
+	 TSM.appDB = {}
+	 TSM.appDB.factionrealm = TradeSkillMasterAppDB.factionrealm[factionrealmKey]
+	 TSM.appDB.profile = TradeSkillMasterAppDB.profiles[profileKey]
+	 TSM.appDB.profile.groupTest = nil
+	 TSM.appDB.keys = {profile=profileKey, factionrealm=factionrealmKey}
 
 	for name, module in pairs(TSM.modules) do
 		TSM[name] = module
